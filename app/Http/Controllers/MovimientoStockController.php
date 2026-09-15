@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MovimientoStock;
 use Illuminate\Http\Request;
 
 class MovimientoStockController extends Controller
@@ -11,15 +12,17 @@ class MovimientoStockController extends Controller
      */
     public function index()
     {
-        //
+        $movimientos = MovimientoStock::all();
+        return view('movimientos.index', compact('movimientos'));
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('movimientos.create');
     }
 
     /**

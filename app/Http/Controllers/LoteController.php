@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lote;
 use Illuminate\Http\Request;
 
 class LoteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $lotes = Lote::all(); 
+        return view('lotes.index', compact('lotes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('lotes.create');
     }
 
     /**

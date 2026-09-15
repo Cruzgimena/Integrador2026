@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Consumo;
 use Illuminate\Http\Request;
 
 class ConsumoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $consumos = Consumo::all(); 
+        return view('consumos.index', compact('consumos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('consumos.create');
     }
 
     /**

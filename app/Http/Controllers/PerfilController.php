@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Perfil;
 use Illuminate\Http\Request;
 
 class PerfilController extends Controller
@@ -11,7 +12,8 @@ class PerfilController extends Controller
      */
     public function index()
     {
-        //
+        $perfiles = Perfil::all();
+        return view('perfiles.index', compact('perfiles'));
     }
 
     /**
@@ -19,7 +21,7 @@ class PerfilController extends Controller
      */
     public function create()
     {
-        //
+        return view('perfiles.create');
     }
 
     /**
