@@ -1,0 +1,54 @@
+# IMPORTANTE: Donde dice <app-name>, reemplazar por el nombre de tu app.
+# Ejemplo: <app-name> = mi-app-laravel,
+# entonces, donde dice <app-name>-app tiene que quedar mi-app-laravel-app.
+# IMPORTANTE: Donde dice container: image:, poner ahí la URL de la imagen subida a GitHub.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gestionando-te-deployment
+spec:
+  selector:
+    matchLabels:
+      app: gestionando-te-app
+  template:
+    metadata:
+      labels:
+        app: gestionando-te-app
+    spec:
+      imagePullSecrets:
+        - name: ghcr-registry-secret
+      containers:
+      - name: gestionando-te-container
+        image: ghcr.io/cruzgimena/laravel-gestionando_te:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: DB_HOST
+          value: "mysql-database"
+        - name: DB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: database-credentials
+              key: db-name
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: database-credentials
+              key: db-user
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-credentials
+              key: db-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gestionando-te-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: gestionando-te-app
+  ports:
+    - port: 8000
+      targetPort: 80
