@@ -48,23 +48,42 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'nombre_usuario' => ['required', 'string', 'max:50', 'unique:users'],
+            'nombres'        => ['required', 'string', 'max:150'],
+            'apellido'       => ['required', 'string', 'max:45'],
+            'email'          => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'       => ['required', 'string', 'min:8', 'confirmed'],
+            'id_perfil'      => ['required', 'integer'],
+        ], [
+            // Mensajes personalizados en español
+            'nombre_usuario.unique'   => 'El nombre de usuario ya se encuentra registrado.',
+            'nombre_usuario.required' => 'El nombre de usuario es obligatorio.',
+            'email.unique'            => 'El correo electrónico ya se encuentra registrado.',
+            'email.required'          => 'El correo electrónico es obligatorio.',
+            'email.email'             => 'Ingresá un correo electrónico válido.',
+            'password.required'       => 'La contraseña es obligatoria.',
+            'password.min'            => 'La contraseña debe tener al menos 8 caracteres.',
+            'password.confirmed'      => 'Las contraseñas ingresadas no coinciden.',
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @return User
+     * @param  array  $data
+     * @return \App\Models\User
      */
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name'           => $data['nombres'] . ' ' . $data['apellido'],
+            'nombre_usuario' => $data['nombre_usuario'],
+            'nombres'        => $data['nombres'],
+            'apellido'       => $data['apellido'],
+            'email'          => $data['email'],
+            'id_perfil'      => $data['id_perfil'],
+            'estado'         => 'activo',
+            'password'       => Hash::make($data['password']),
         ]);
     }
 }

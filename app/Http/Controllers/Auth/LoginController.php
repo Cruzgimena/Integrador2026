@@ -4,20 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
+    
     use AuthenticatesUsers;
 
     /**
@@ -35,6 +26,30 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $this->middleware('auth')->only('logout');
+    }
+
+    /**
+     * Define el nombre del campo del formulario.
+     */
+    public function username()
+    {
+        return 'login';
+    }
+
+    /**
+     * Obtiene las credenciales verificando si se ingresó un Email o un Nombre de Usuario.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function credentials(Request $request)
+    {
+        $login = $request->get('login');
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'nombre_usuario';
+
+        return [
+            $field     => $login,
+            'password' => $request->get('password'),
+        ];
     }
 }

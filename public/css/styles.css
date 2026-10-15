@@ -1,0 +1,226 @@
+/* public/css/styles.css */
+
+/* Configuración general */
+body {
+    background-color: #f1f5f9;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Tarjeta contenedora principal */
+.auth-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 960px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    min-height: 520px;
+}
+
+/* Panel izquierdo (Branding e Institucional) */
+.auth-sidebar {
+    background-color: #1d4ed8;
+    color: #ffffff;
+    padding: 48px;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.auth-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.auth-brand svg {
+    width: 36px;
+    height: 36px;
+}
+
+.auth-brand h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.auth-slogan {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.4;
+    margin-top: 32px;
+}
+
+.auth-slogan span {
+    font-weight: 600;
+    color: #bfdbfe;
+}
+
+.auth-version {
+    font-size: 14px;
+    color: #bfdbfe;
+}
+
+/* Panel derecho (Formulario) */
+.auth-form {
+    padding: 48px;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.auth-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 8px 0;
+}
+
+.auth-subtitle {
+    color: #64748b;
+    font-size: 14px;
+    margin: 0 0 28px 0;
+}
+
+/* Campos del formulario */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #334155;
+    margin-bottom: 6px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+select.form-input {
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+/* Filas para campos distribuidos en 2 columnas */
+.form-row {
+    display: flex;
+    gap: 16px;
+}
+
+.form-col {
+    flex: 1;
+}
+
+/* Fila de utilidades (Recordarme / Olvidaste contraseña) */
+.form-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    font-size: 14px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #334155;
+}
+
+.link-primary {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.link-primary:hover {
+    text-decoration: underline;
+    color: #1d4ed8;
+}
+
+/* Botón principal */
+.btn-primary {
+    width: 100%;
+    background-color: #1d4ed8;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #1e40af;
+}
+
+/* Footer del formulario */
+.auth-footer {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* Mensajes de validación de error */
+.text-error {
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.input-error {
+    border-color: #ef4444 !important;
+}
+
+/* Adaptación para pantallas pequeñas */
+@media (max-width: 768px) {
+    .auth-card {
+        flex-direction: column;
+        width: 100%;
+        min-height: 100vh;
+        border-radius: 0;
+    }
+    .auth-sidebar {
+        display: none;
+    }
+    .auth-form {
+        width: 100%;
+        padding: 24px;
+    }
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}

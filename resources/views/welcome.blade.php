@@ -50,5 +50,10 @@
         <p>GestionandoTé &copy; {{ date('Y') }} - Cruz, Millán, Jarque</p>
     </footer>
 
+<div class="flex space-x-4">
+    <a href="{{ route('login') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Iniciar Sesión</a>
+    <a href="{{ route('register') }}" class="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50">Registrarse</a>
+</div>
+
 </body>
 </html>

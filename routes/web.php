@@ -1,32 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
-// Importar todos los controladores
-use App\Http\Controllers\PerfilController;
-use App\Http\Controllers\ProveedorController;
-use App\Http\Controllers\CamionController;
-use App\Http\Controllers\StockController;
-use App\Http\Controllers\ConsumoController;
-use App\Http\Controllers\LoteController;
-use App\Http\Controllers\MovimientoStockController;
+/*
+|--------------------------------------------------------------------------
+| Web Routes - GestionandoTé
+|--------------------------------------------------------------------------
+*/
 
+// 1. Redirigir la raíz del sitio directamente al login
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
-Route::middleware(['auth'])->group(function(){
-
-    Route::resource('perfiles', PerfilController::class);
-    Route::resource('proveedores', ProveedorController::class);
-    Route::resource('camiones', CamionController::class);
-    Route::resource('stock', StockController::class);
-    Route::resource('consumos', ConsumoController::class);
-    Route::resource('lotes', LoteController::class);
-    Route::resource('movimientos-stock', MovimientoStockController::class);
-
-});
-
+// 2. Cargar todas las rutas automáticas de autenticación (login, logout, register)
 Auth::routes();
 
+// 3. Ruta del panel principal tras iniciar sesión
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

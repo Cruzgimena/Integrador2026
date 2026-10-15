@@ -1,54 +1,95 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - GestionandoTé</title>
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+</head>
+<body>
 
-@section('content')
-    <section>
-        <h2 class="destacado">Iniciar Sesión</h2>
+    <div class="auth-card">
         
-        <div class="contenedor-articulo">
+        <!-- PANEL IZQUIERDO: Branding e Institucional -->
+        <div class="auth-sidebar">
             <div>
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
+                <div class="auth-brand">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                    </svg>
+                    <h1>GestionandoTé</h1>
+                </div>
 
-                    <div style="margin-bottom: 15px;">
-                        <label for="email" style="display: block; font-weight: bold;">Correo Electrónico:</label>
-                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus style="width: 100%; padding: 8px;">
-
-                        @error('email')
-                            <span style="color: red; font-size: 14px;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div style="margin-bottom: 15px;">
-                        <label for="password" style="display: block; font-weight: bold;">Contraseña:</label>
-                        <input id="password" type="password" name="password" required autocomplete="current-password" style="width: 100%; padding: 8px;">
-
-                        @error('password')
-                            <span style="color: red; font-size: 14px;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div style="margin-bottom: 15px;">
-                        <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                        <label for="remember">Recordarme</label>
-                    </div>
-
-                    <div>
-                        <button type="submit" style="background-color: #2c3e50; color: white; padding: 10px 20px; border: none; font-weight: bold; cursor: pointer;">
-                            Ingresar
-                        </button>
-
-                        @if (Route::has('password.request'))
-                            <a href="{{ route('password.request') }}" style="color: #2c3e50; margin-left: 15px; font-weight: normal;">
-                                ¿Olvidaste tu contraseña?
-                            </a>
-                        @endif
-                    </div>
-                </form>
+                <p class="auth-slogan">
+                    "Administrá tu producción con<br>
+                    <span>precisión y cuidado</span>"
+                </p>
+            </div>
+            
+            <div class="auth-version">
+                Versión v2.4.0
             </div>
         </div>
-    </section>
-@endsection
+
+        <!-- PANEL DERECHO: Formulario de Login -->
+        <div class="auth-form">
+            <h2 class="auth-title">Bienvenido</h2>
+            <p class="auth-subtitle">Por favor, ingresá tus credenciales para continuar.</p>
+
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+
+                <!-- Campo Usuario / Email -->
+                <div class="form-group">
+                    <label for="login" class="form-label">
+                        Usuario o Correo Electrónico
+                    </label>
+                    <input id="login" type="text" name="login" value="{{ old('login') }}" required autofocus
+                        class="form-input @error('login') input-error @enderror"
+                        placeholder="Usuario o correo@ejemplo.com">
+                    @error('login')
+                        <p class="text-error">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Campo de Contraseña -->
+                <div class="form-group">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" id="password" name="password" required 
+                        class="form-input @error('password') input-error @enderror"
+                        placeholder="••••••••">
+                    @error('password')
+                        <p class="text-error">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Recordarme y Enlace de Recuperación -->
+                <div class="form-options">
+                    <label for="remember" class="remember-me">
+                        <input type="checkbox" id="remember" name="remember">
+                        <span>Recordarme</span>
+                    </label>
+                    <div>
+                        <a href="#" class="link-primary">¿Olvidaste tu contraseña?</a>
+                    </div>
+                </div>
+
+                <!-- Botón de Ingreso -->
+                <button type="submit" class="btn-primary">
+                    Ingresar al Sistema
+                </button>
+
+                <!-- Enlace de registro -->
+                <div class="auth-footer">
+                    ¿No tenés una cuenta? 
+                    <a href="{{ route('register') }}" class="link-primary">
+                        Registrate aquí
+                    </a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>
