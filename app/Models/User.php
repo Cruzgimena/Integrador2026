@@ -12,20 +12,21 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $primaryKey = 'IDUsuario';
+
     /**
      * Los atributos que se pueden asignar de forma masiva.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'nombre_usuario',
-        'nombres',
-        'apellido',
+        'NombreUsuario',
+        'Nombres',
+        'Apellido',
         'email',
         'password',
-        'estado',
-        'id_perfil',
+        'Estado',
+    
     ];
 
     /**

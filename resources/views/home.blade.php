@@ -55,15 +55,15 @@
 
                 {{-- Módulos para Operador de Báscula y Admin --}}
                 @if(in_array($userRole, ['administrador', 'operador_bascula']))
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+                    <a href="{{ route('lotes.create') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
                         <i class="fa-solid fa-truck-front w-5 text-center text-blue-400"></i>
                         <span>Entrada de Camiones</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+                    <a href="{{ route('salidas.create') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
                         <i class="fa-solid fa-truck-arrow-right w-5 text-center text-indigo-400"></i>
                         <span>Salida de Camiones</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+                    <a href="{{ route('calidad.create') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
                         <i class="fa-solid fa-clipboard-check w-5 text-center text-purple-400"></i>
                         <span>Control de Calidad</span>
                     </a>
@@ -71,11 +71,11 @@
 
                 {{-- Módulos para Encargado de Stock y Admin --}}
                 @if(in_array($userRole, ['administrador', 'encargado_stock']))
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+                    <a href="{{ route('stock.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
                         <i class="fa-solid fa-boxes-stacked w-5 text-center text-emerald-400"></i>
                         <span>Consulta de Stock</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+                    <a href="{{ route('consumo.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
                         <i class="fa-solid fa-industry w-5 text-center text-amber-400"></i>
                         <span>Consumo de Planta</span>
                     </a>
@@ -126,7 +126,7 @@
                             <h3 class="font-bold text-lg text-slate-800 mb-1">1. Registrar Ingreso de Camión</h3>
                             <p class="text-slate-500 text-sm mb-4">Ingreso de datos del camión y proveedor. Pesaje BRUTO (kg).</p>
                         </div>
-                        <a href="#" class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 mt-2">
+                        <a href="{{ route('lotes.index') }}" class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 mt-2">
                             Ingresar <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
                         </a>
                     </div>
@@ -142,7 +142,7 @@
                             <h3 class="font-bold text-lg text-slate-800 mb-1">2. Registrar Egreso de Camión</h3>
                             <p class="text-slate-500 text-sm mb-4">Selección de camión, pesaje de TARA y cálculo automático del NETO.</p>
                         </div>
-                        <a href="#" class="inline-flex items-center text-sm font-semibold text-indigo-600 hover:text-indigo-800 mt-2">
+                        <a href="{{ route('salidas.create') }}" class="inline-flex items-center text-sm font-semibold text-indigo-600 hover:text-indigo-800 mt-2">
                             Ingresar <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
                         </a>
                     </div>
@@ -158,7 +158,7 @@
                             <h3 class="font-bold text-lg text-slate-800 mb-1">3.Control de Calidad</h3>
                             <p class="text-slate-500 text-sm mb-4">Análisis por lote (humedad, color e impurezas).</p>
                         </div>
-                        <a href="#" class="inline-flex items-center text-sm font-semibold text-purple-600 hover:text-purple-800 mt-2">
+                        <a href="{{ route('lotes.index') }}" class="inline-flex items-center text-sm font-semibold text-purple-600 hover:text-purple-800 mt-2">
                             Ingresar <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
                         </a>
                     </div>
