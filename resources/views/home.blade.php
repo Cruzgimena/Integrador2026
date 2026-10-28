@@ -158,7 +158,7 @@
                             <h3 class="font-bold text-lg text-slate-800 mb-1">3.Control de Calidad</h3>
                             <p class="text-slate-500 text-sm mb-4">Análisis por lote (humedad, color e impurezas).</p>
                         </div>
-                        <a href="{{ route('lotes.index') }}" class="inline-flex items-center text-sm font-semibold text-purple-600 hover:text-purple-800 mt-2">
+                        <a href="{{ route('calidad.create') }}" class="inline-flex items-center text-sm font-semibold text-purple-600 hover:text-purple-800 mt-2">
                             Ingresar <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
                         </a>
                     </div>
@@ -177,7 +177,7 @@
                             <h3 class="font-bold text-lg text-slate-800 mb-1">4. Gestión / Consulta de Stock</h3>
                             <p class="text-slate-500 text-sm mb-4">Ver stock actual de hoja verde e histórico de movimientos.</p>
                         </div>
-                        <a href="#" class="inline-flex items-center text-sm font-semibold text-emerald-600 hover:text-emerald-800 mt-2">
+                        <a href="{{ route('stock.index') }}" class="inline-flex items-center text-sm font-semibold text-emerald-600 hover:text-emerald-800 mt-2">
                             Ingresar <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
                         </a>
                     </div>
