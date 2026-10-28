@@ -75,13 +75,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // Mapear el id_perfil numérico al nombre del rol que usa home.blade.php
+        $mapRoles = [
+            1 => 'administrador',
+            2 => 'operador_bascula',
+            3 => 'encargado_stock',
+        ];
+
+        $perfilId = (int) $data['id_perfil'];
+        $rolTexto = $mapRoles[$perfilId] ?? 'operador_bascula';
+
         return User::create([
             'name'           => $data['nombres'] . ' ' . $data['apellido'],
             'nombre_usuario' => $data['nombre_usuario'],
             'nombres'        => $data['nombres'],
             'apellido'       => $data['apellido'],
             'email'          => $data['email'],
-            'id_perfil'      => $data['id_perfil'],
+            'id_perfil'      => $perfilId,
+            'role'           => $rolTexto, // <-- Este campo faltaba
             'estado'         => 'activo',
             'password'       => Hash::make($data['password']),
         ]);

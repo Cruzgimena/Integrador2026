@@ -83,15 +83,15 @@
 
                 {{-- Módulos Exclusivos para Administrador --}}
                 @if($userRole === 'administrador')
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+                    <a href="{{ route('reportes.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
                         <i class="fa-solid fa-chart-line w-5 text-center text-rose-400"></i>
                         <span>Generar Reportes</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+                    <a href="{{ route('usuarios.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
                         <i class="fa-solid fa-users w-5 text-center text-cyan-400"></i>
                         <span>Gestión de Usuarios</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+                    <a href="{{ route('datos.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
                         <i class="fa-solid fa-database w-5 text-center text-teal-400"></i>
                         <span>Gestión de Datos</span>
                     </a>
@@ -228,7 +228,7 @@
                             <h3 class="font-bold text-lg text-slate-800 mb-1">7. Generar Reportes</h3>
                             <p class="text-slate-500 text-sm mb-4">Reportes diarios, por proveedor y por rango de fechas.</p>
                         </div>
-                        <a href="#" class="inline-flex items-center text-sm font-semibold text-rose-600 hover:text-rose-800 mt-2">
+                        <a href="{{ route('reportes.index') }}" class="inline-flex items-center text-sm font-semibold text-rose-600 hover:text-rose-800 mt-2">
                             Ingresar <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
                         </a>
                     </div>

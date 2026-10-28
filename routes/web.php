@@ -7,6 +7,9 @@ use App\Http\Controllers\LoteController;
 use App\Http\Controllers\SalidaCamionController;
 use App\Http\Controllers\CalidadController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\ReporteController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,9 +41,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/salidas', [SalidaCamionController::class, 'store'])->name('salidas.store');
 
     // Módulo 3: Control de Calidad
-    Route::get('/calidad/crear', function () {
-        return "Módulo de Control de Calidad en desarrollo";
-    })->name('calidad.create');
+    Route::get('/calidad/crear', [CalidadController::class, 'create'])->name('calidad.create');
+    Route::post('/calidad', [CalidadController::class, 'store'])->name('calidad.store');
 
     // Módulo 4: Consulta de Stock (ambos nombres para evitar problemas)
     Route::get('/stock', [StockController::class, 'index'])->name('stock.index');
@@ -57,9 +59,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('usuarios.index');
 
     // Módulo 7: Generar Reportes
-    Route::get('/reportes', function () {
-        return "Módulo de Reportes en desarrollo";
-    })->name('reportes.index');
+    Route::get('/reportes', [ReporteController::class, 'index'])->name('reportes.index');
 
     // Módulo 8: Gestión de Datos
     Route::get('/datos', function () {

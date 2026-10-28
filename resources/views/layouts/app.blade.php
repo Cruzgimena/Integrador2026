@@ -69,15 +69,15 @@
                     </a>
 
                     <!-- Control de Calidad -->
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
-                        <i class="fa-solid fa-clipboard-check w-5 text-center text-purple-400"></i>
+                    <a href="{{ route('calidad.create') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg {{ request()->routeIs('calidad.*') ? 'bg-emerald-600 text-white shadow-sm' : 'hover:bg-slate-700 hover:text-white text-slate-300' }} font-medium transition">
+                        <i class="fa-solid fa-clipboard-check w-5 text-center {{ request()->routeIs('calidad.*') ? 'text-white' : 'text-purple-400' }}"></i>
                         <span>Control de Calidad</span>
                     </a>
                 @endif
 
                 {{-- Módulos Stock --}}
                 @if(in_array($userRole, ['administrador', 'encargado_stock']))
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+                    <a href="{{ route('stock.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
                         <i class="fa-solid fa-boxes-stacked w-5 text-center text-emerald-400"></i>
                         <span>Consulta de Stock</span>
                     </a>
