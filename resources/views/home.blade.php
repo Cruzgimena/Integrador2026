@@ -37,14 +37,15 @@
         </div>
     </header>
 
-    <div class="flex flex-1">
+    <div class="flex flex-1 w-full">
         
         @php
-            $userRole = Auth::user()->role ?? 'administrador'; 
+            // Aseguramos que el rol esté en minúsculas para que los IF no fallen
+            $userRole = strtolower(Auth::user()->role ?? 'administrador'); 
         @endphp
 
         <!-- Sidebar / Menú Lateral -->
-        <aside class="w-64 bg-slate-800 text-slate-300 flex flex-col justify-between p-4 shadow-lg">
+        <aside class="w-64 bg-slate-800 text-slate-300 flex flex-col justify-between p-4 shadow-lg min-h-full">
             <nav class="space-y-1">
                 <p class="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Módulos Disponibles</p>
 
@@ -71,11 +72,11 @@
 
                 {{-- Módulos para Encargado de Stock y Admin --}}
                 @if(in_array($userRole, ['administrador', 'encargado_stock']))
-                    <a href="{{ route('stock.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
                         <i class="fa-solid fa-boxes-stacked w-5 text-center text-emerald-400"></i>
                         <span>Consulta de Stock</span>
                     </a>
-                    <a href="{{ route('consumo.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
                         <i class="fa-solid fa-industry w-5 text-center text-amber-400"></i>
                         <span>Consumo de Planta</span>
                     </a>
@@ -104,7 +105,7 @@
         </aside>
 
         <!-- Área Principal de Contenido -->
-        <main class="flex-1 p-8 overflow-y-auto">
+        <main class="flex-1 p-8 overflow-y-auto w-full">
             <div class="mb-8">
                 <h1 class="text-2xl font-bold text-slate-900">Menú Principal de Operaciones</h1>
                 <p class="text-slate-600 text-sm mt-1">Selecciona una de las opciones habilitadas para tu rol actual.</p>
@@ -126,7 +127,7 @@
                             <h3 class="font-bold text-lg text-slate-800 mb-1">1. Registrar Ingreso de Camión</h3>
                             <p class="text-slate-500 text-sm mb-4">Ingreso de datos del camión y proveedor. Pesaje BRUTO (kg).</p>
                         </div>
-                        <a href="{{ route('lotes.index') }}" class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 mt-2">
+                        <a href="{{ route('lotes.create') }}" class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 mt-2">
                             Ingresar <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
                         </a>
                     </div>
@@ -155,7 +156,7 @@
                                 </div>
                                 <span class="text-xs bg-purple-100 text-purple-800 font-semibold px-2 py-1 rounded">Báscula</span>
                             </div>
-                            <h3 class="font-bold text-lg text-slate-800 mb-1">3.Control de Calidad</h3>
+                            <h3 class="font-bold text-lg text-slate-800 mb-1">3. Control de Calidad</h3>
                             <p class="text-slate-500 text-sm mb-4">Análisis por lote (humedad, color e impurezas).</p>
                         </div>
                         <a href="{{ route('calidad.create') }}" class="inline-flex items-center text-sm font-semibold text-purple-600 hover:text-purple-800 mt-2">
@@ -177,7 +178,7 @@
                             <h3 class="font-bold text-lg text-slate-800 mb-1">4. Gestión / Consulta de Stock</h3>
                             <p class="text-slate-500 text-sm mb-4">Ver stock actual de hoja verde e histórico de movimientos.</p>
                         </div>
-                        <a href="{{ route('stock.index') }}" class="inline-flex items-center text-sm font-semibold text-emerald-600 hover:text-emerald-800 mt-2">
+                        <a href="#" class="inline-flex items-center text-sm font-semibold text-emerald-600 hover:text-emerald-800 mt-2">
                             Ingresar <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
                         </a>
                     </div>
@@ -190,7 +191,7 @@
                                 </div>
                                 <span class="text-xs bg-amber-100 text-amber-800 font-semibold px-2 py-1 rounded">Planta</span>
                             </div>
-                            <h3 class="font-bold text-lg text-slate-800 mb-1">5.Registro Consumo de Planta</h3>
+                            <h3 class="font-bold text-lg text-slate-800 mb-1">5. Registro Consumo de Planta</h3>
                             <p class="text-slate-500 text-sm mb-4">Ingresar kg consumidos y verificar alertas de stock mínimo.</p>
                         </div>
                         <a href="#" class="inline-flex items-center text-sm font-semibold text-amber-600 hover:text-amber-800 mt-2">
