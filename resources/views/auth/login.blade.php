@@ -11,22 +11,20 @@
     <div class="auth-card">
         
         <!-- PANEL IZQUIERDO: Branding e Institucional -->
-        <div class="auth-sidebar">
-            <div>
-                <div class="auth-brand">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-                    </svg>
-                    <h1>GestionandoTé</h1>
+        <div class="auth-sidebar" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+            <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                <div class="auth-brand" style="display: flex; justify-content: center; width: 100%;">
+                    <!-- Logo centrado -->
+                    <img src="{{ asset('img/logo.png') }}" alt="Logo GestionandoTé" style="max-width: 200px; height: auto; margin-bottom: 20px;">
                 </div>
 
-                <p class="auth-slogan">
+                <p class="auth-slogan" style="text-align: center; margin: 0 auto;">
                     "Administrá tu producción con<br>
                     <span>precisión y cuidado</span>"
                 </p>
             </div>
             
-            <div class="auth-version">
+            <div class="auth-version" style="text-align: center; width: 100%;">
                 Versión v2.4.0
             </div>
         </div>
