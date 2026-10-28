@@ -8,7 +8,8 @@ use App\Http\Controllers\SalidaCamionController;
 use App\Http\Controllers\CalidadController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\ReporteController;
-
+use App\Http\Controllers\ConsumoController;
+use App\Http\Controllers\UsuarioController;
 
 
 /*
@@ -49,15 +50,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/stocks', [StockController::class, 'index'])->name('stocks.index');
 
     // Módulo 5: Consumo de Planta
-    Route::get('/consumo', function () {
-        return "Módulo de Consumo de Planta en desarrollo";
-    })->name('consumo.index');
+   // Consumo de Planta
+    Route::get('/consumos', [ConsumoController::class, 'index'])->name('consumos.index');
+    Route::get('/consumos/crear', [ConsumoController::class, 'create'])->name('consumos.create');
+    Route::post('/consumos', [ConsumoController::class, 'store'])->name('consumos.store');
 
     // Módulo 6: Gestión de Usuarios
-    Route::get('/usuarios', function () {
-        return "Módulo de Usuarios en desarrollo";
-    })->name('usuarios.index');
-
+    Route::resource('usuarios', UsuarioController::class);
+    Route::patch('/usuarios/{usuario}/estado', [UsuarioController::class, 'toggleEstado'])->name('usuarios.toggleEstado');
     // Módulo 7: Generar Reportes
     Route::get('/reportes', [ReporteController::class, 'index'])->name('reportes.index');
 

@@ -81,7 +81,7 @@
                         <i class="fa-solid fa-boxes-stacked w-5 text-center text-emerald-400"></i>
                         <span>Consulta de Stock</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+                    <a href="{{ route('consumos.create') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
                         <i class="fa-solid fa-industry w-5 text-center text-amber-400"></i>
                         <span>Consumo de Planta</span>
                     </a>
@@ -89,11 +89,11 @@
 
                 {{-- Módulos Administrador --}}
                 @if($userRole === 'administrador')
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+                    <a href="{{ route('reportes.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
                         <i class="fa-solid fa-chart-line w-5 text-center text-rose-400"></i>
                         <span>Generar Reportes</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+                    <a href="{{ route('usuarios.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
                         <i class="fa-solid fa-users w-5 text-center text-cyan-400"></i>
                         <span>Gestión de Usuarios</span>
                     </a>

@@ -75,7 +75,7 @@
                         <i class="fa-solid fa-boxes-stacked w-5 text-center text-emerald-400"></i>
                         <span>Consulta de Stock</span>
                     </a>
-                    <a href="{{ route('consumo.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+                    <a href="{{ route('consumos.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
                         <i class="fa-solid fa-industry w-5 text-center text-amber-400"></i>
                         <span>Consumo de Planta</span>
                     </a>
@@ -193,7 +193,7 @@
                             <h3 class="font-bold text-lg text-slate-800 mb-1">5.Registro Consumo de Planta</h3>
                             <p class="text-slate-500 text-sm mb-4">Ingresar kg consumidos y verificar alertas de stock mínimo.</p>
                         </div>
-                        <a href="#" class="inline-flex items-center text-sm font-semibold text-amber-600 hover:text-amber-800 mt-2">
+                        <a href="{{ route('consumos.create') }}" class="inline-flex items-center text-sm font-semibold text-amber-600 hover:text-amber-800 mt-2">
                             Ingresar <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
                         </a>
                     </div>
@@ -212,7 +212,7 @@
                             <h3 class="font-bold text-lg text-slate-800 mb-1">6. Gestión de Usuarios</h3>
                             <p class="text-slate-500 text-sm mb-4">Agregar, eliminar, modificar y guardar usuarios en la BD.</p>
                         </div>
-                        <a href="#" class="inline-flex items-center text-sm font-semibold text-cyan-600 hover:text-cyan-800 mt-2">
+                        <a href="{{ route('usuarios.index') }}" class="inline-flex items-center text-sm font-semibold text-cyan-600 hover:text-cyan-800 mt-2">
                             Ingresar <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
                         </a>
                     </div>
