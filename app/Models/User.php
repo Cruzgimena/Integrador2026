@@ -12,6 +12,7 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $table = 'users'; // Nombre de la tabla en la base de datos
     protected $primaryKey = 'IDUsuario';
 
     /**
@@ -20,16 +21,18 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-    'name',
     'nombre_usuario',
-    'nombres',
-    'apellido',
+    'Nombres',
+    'Apellido',
     'email',
-    'id_perfil',
-    'role',
-    'estado',
     'password',
-];
+    'role',
+    'rol',
+    'estado',
+    'Estado',
+    ];
+    
+    
 
     /**
      * Los atributos que deben permanecer ocultos para la serialización.
@@ -53,4 +56,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function getNameAttribute()
+    {
+        if (!empty($this->Nombres)){
+            return trim($this->Nombres . ' ' . $this->Apellido  ?? '');
+        }
+        return $this->nombre_usuario ?? $this->email;
+    }
 }
+

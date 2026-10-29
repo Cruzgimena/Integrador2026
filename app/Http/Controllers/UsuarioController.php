@@ -11,7 +11,7 @@ class UsuarioController extends Controller
 {
     public function index()
     {
-        $colId =(new User)->getKeyName(); 
+        $colId = (new User)->getKeyName(); 
 
         $usuarios = User::orderBy($colId, 'desc')->paginate(10);
         return view('usuarios.index', compact('usuarios'));
@@ -37,19 +37,49 @@ class UsuarioController extends Controller
             'role.required'     => 'Debe asignar un rol al usuario.',
         ]);
 
+        // Separar nombre y apellido si viene nombre completo
+        $partes = explode(' ', trim($request->name), 2);
+        $nombres = $partes[0];
+        $apellido = $partes[1] ?? '';
+
         $userData = [
-            'name'     => $request->name,
             'email'    => $request->email,
             'password' => Hash::make($request->password),
         ];
 
-        // Compatibilidad con columnas de roles y estados
+        // Compatibilidad con columna 'name' estándar si existe
+        if (Schema::hasColumn('users', 'name')) {
+            $userData['name'] = $request->name;
+        }
+
+        // Columnas reales de tu base de datos
+        if (Schema::hasColumn('users', 'nombre_usuario')) {
+            $userData['nombre_usuario'] = $request->name;
+        } elseif (Schema::hasColumn('users', 'NombreUsuario')) {
+            $userData['NombreUsuario'] = $request->name;
+        }
+
+        if (Schema::hasColumn('users', 'Nombres')) {
+            $userData['Nombres'] = $nombres;
+        } elseif (Schema::hasColumn('users', 'nombres')) {
+            $userData['nombres'] = $nombres;
+        }
+
+        if (Schema::hasColumn('users', 'Apellido')) {
+            $userData['Apellido'] = $apellido;
+        } elseif (Schema::hasColumn('users', 'apellido')) {
+            $userData['apellido'] = $apellido;
+        }
+
+        // Roles
         if (Schema::hasColumn('users', 'role')) {
             $userData['role'] = $request->role;
         }
         if (Schema::hasColumn('users', 'rol')) {
             $userData['rol'] = $request->role;
         }
+
+        // Estado inicial
         if (Schema::hasColumn('users', 'Estado')) {
             $userData['Estado'] = 'Activo';
         } elseif (Schema::hasColumn('users', 'estado')) {
@@ -68,14 +98,43 @@ class UsuarioController extends Controller
 
     public function update(Request $request, User $usuario)
     {
+        $idKey = $usuario->getKey();
+
         $request->validate([
             'name'     => 'required|string|max:150',
-            'email'    => 'required|email|max:150|unique:users,email,' . $usuario->id,
+            'email'    => 'required|email|max:150|unique:users,email,' . $idKey . ',' . $usuario->getKeyName(),
             'role'     => 'required|in:administrador,operador_bascula,encargado_stock',
             'password' => 'nullable|string|min:6|confirmed',
         ]);
 
-        $usuario->name  = $request->name;
+        $partes = explode(' ', trim($request->name), 2);
+        $nombres = $partes[0];
+        $apellido = $partes[1] ?? '';
+
+        // Si existe columna 'name'
+        if (Schema::hasColumn('users', 'name')) {
+            $usuario->name = $request->name;
+        }
+
+        // Columnas reales de tu BD
+        if (Schema::hasColumn('users', 'nombre_usuario')) {
+            $usuario->nombre_usuario = $request->name;
+        } elseif (Schema::hasColumn('users', 'NombreUsuario')) {
+            $usuario->NombreUsuario = $request->name;
+        }
+
+        if (Schema::hasColumn('users', 'Nombres')) {
+            $usuario->Nombres = $nombres;
+        } elseif (Schema::hasColumn('users', 'nombres')) {
+            $usuario->nombres = $nombres;
+        }
+
+        if (Schema::hasColumn('users', 'Apellido')) {
+            $usuario->Apellido = $apellido;
+        } elseif (Schema::hasColumn('users', 'apellido')) {
+            $usuario->apellido = $apellido;
+        }
+
         $usuario->email = $request->email;
 
         if (Schema::hasColumn('users', 'role')) {
@@ -104,26 +163,27 @@ class UsuarioController extends Controller
 
     public function destroy(User $usuario)
     {
-        if (auth()->id() === $usuario->id) {
+        if (auth()->id() === $usuario->getKey()) {
             return back()->with('error', 'No podés eliminar tu propia cuenta mientras estés en sesión.');
         }
 
         $usuario->delete();
         return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado de la base de datos.');
     }
-   public function toggleEstado(User $usuario)
-{
-    if (auth()->id() === $usuario->getKey()) {
-        return back()->with('error', 'No podés modificar el estado de tu propia sesión.');
+
+    public function toggleEstado(User $usuario)
+    {
+        if (auth()->id() === $usuario->getKey()) {
+            return back()->with('error', 'No podés modificar el estado de tu propia sesión.');
+        }
+
+        $colEstado = Schema::hasColumn('users', 'Estado') ? 'Estado' : 'estado';
+        $actual = strtolower($usuario->$colEstado ?? 'activo');
+        $nuevo = ($actual === 'activo') ? 'Inactivo' : 'Activo';
+
+        $usuario->$colEstado = $nuevo;
+        $usuario->save();
+
+        return back()->with('success', "Estado actualizado: {$usuario->name} ahora está {$nuevo}.");
     }
-
-    $colEstado = \Illuminate\Support\Facades\Schema::hasColumn('users', 'Estado') ? 'Estado' : 'estado';
-    $actual = strtolower($usuario->$colEstado ?? 'activo');
-    $nuevo = ($actual === 'activo') ? 'Inactivo' : 'Activo';
-
-    $usuario->$colEstado = $nuevo;
-    $usuario->save();
-
-    return back()->with('success', "Estado actualizado: {$usuario->name} ahora está {$nuevo}.");
-}
 }

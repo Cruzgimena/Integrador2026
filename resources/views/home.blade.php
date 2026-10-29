@@ -91,10 +91,6 @@
                         <i class="fa-solid fa-users w-5 text-center text-cyan-400"></i>
                         <span>Gestión de Usuarios</span>
                     </a>
-                    <a href="{{ route('datos.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
-                        <i class="fa-solid fa-database w-5 text-center text-teal-400"></i>
-                        <span>Gestión de Datos</span>
-                    </a>
                 @endif
             </nav>
 
@@ -233,21 +229,7 @@
                         </a>
                     </div>
 
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition border-l-4 border-l-teal-500 flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-start mb-4">
-                                <div class="p-3 bg-teal-50 rounded-lg text-teal-600">
-                                    <i class="fa-solid fa-database text-2xl"></i>
-                                </div>
-                                <span class="text-xs bg-teal-100 text-teal-800 font-semibold px-2 py-1 rounded">Admin</span>
-                            </div>
-                            <h3 class="font-bold text-lg text-slate-800 mb-1">8. Gestión de Datos</h3>
-                            <p class="text-slate-500 text-sm mb-4">Gestionar proveedores, camiones y parámetros (stock mínimo).</p>
-                        </div>
-                        <a href="#" class="inline-flex items-center text-sm font-semibold text-teal-600 hover:text-teal-800 mt-2">
-                            Ingresar <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
-                        </a>
-                    </div>
+                    
                 @endif
 
             </div>

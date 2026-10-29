@@ -39,81 +39,55 @@
 
     <div class="flex flex-1">
         
-        @php
-            $userRole = Auth::user()->role ?? 'administrador'; 
-        @endphp
+      @php
+    $userRole = Auth::user()->role ?? Auth::user()->rol ?? 'operador_bascula';
+@endphp
 
-        <!-- Sidebar / Menú Lateral Idéntico al Dashboard -->
-        <aside class="w-64 bg-slate-800 text-slate-300 flex flex-col justify-between p-4 shadow-lg flex-shrink-0">
-            <nav class="space-y-1">
-                <p class="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Módulos Disponibles</p>
+<nav class="space-y-1">
+    <p class="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Módulos Disponibles</p>
 
-                <!-- Menú Principal -->
-                <a href="{{ route('home') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg {{ request()->routeIs('home') ? 'bg-emerald-600 text-white shadow-sm' : 'hover:bg-slate-700 hover:text-white text-slate-300' }} font-medium transition">
-                    <i class="fa-solid fa-house w-5 text-center"></i>
-                    <span>Menú Principal</span>
-                </a>
+    <a href="{{ route('home') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+        <i class="fa-solid fa-house w-5 text-center text-emerald-400"></i>
+        <span>Menú Principal</span>
+    </a>
 
-                {{-- Módulos Báscula --}}
-                @if(in_array($userRole, ['administrador', 'operador_bascula']))
-                    <!-- Entrada de Camiones -->
-                    <a href="{{ route('lotes.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg {{ request()->is('lotes*') ? 'bg-emerald-600 text-white shadow-sm' : 'hover:bg-slate-700 hover:text-white text-slate-300' }} font-medium transition">
-                        <i class="fa-solid fa-truck-front w-5 text-center {{ request()->is('lotes*') ? 'text-white' : 'text-blue-400' }}"></i>
-                        <span>Entrada de Camiones</span>
-                    </a>
+    {{-- Módulos Báscula --}}
+    @if(in_array($userRole, ['administrador', 'operador_bascula']))
+        <a href="{{ route('lotes.create') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+            <i class="fa-solid fa-truck-front w-5 text-center text-blue-400"></i>
+            <span>Entrada de Camiones</span>
+        </a>
+        <a href="{{ route('salidas.create') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+            <i class="fa-solid fa-truck-arrow-right w-5 text-center text-indigo-400"></i>
+            <span>Salida de Camiones</span>
+        </a>
+        <a href="{{ route('calidad.create') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+            <i class="fa-solid fa-clipboard-check w-5 text-center text-purple-400"></i>
+            <span>Control de Calidad</span>
+        </a>
+    @endif
 
-                    <!-- Salida de Camiones -->
-                    <a href="{{ route('salidas.create') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg {{ request()->routeIs('salidas.*') ? 'bg-emerald-600 text-white shadow-sm' : 'hover:bg-slate-700 hover:text-white text-slate-300' }} font-medium transition">
-                        <i class="fa-solid fa-truck-arrow-right w-5 text-center text-indigo-400"></i>
-                        <span>Salida de Camiones</span>
-                    </a>
+    {{-- Módulos Stock --}}
+    @if(in_array($userRole, ['administrador', 'encargado_stock']))
+        <a href="{{ route('stock.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+            <i class="fa-solid fa-boxes-stacked w-5 text-center text-emerald-400"></i>
+            <span>Consulta de Stock</span>
+        </a>
+        <a href="{{ route('consumos.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+            <i class="fa-solid fa-industry w-5 text-center text-amber-400"></i>
+            <span>Consumo de Planta</span>
+        </a>
+    @endif
 
-                    <!-- Control de Calidad -->
-                    <a href="{{ route('calidad.create') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg {{ request()->routeIs('calidad.*') ? 'bg-emerald-600 text-white shadow-sm' : 'hover:bg-slate-700 hover:text-white text-slate-300' }} font-medium transition">
-                        <i class="fa-solid fa-clipboard-check w-5 text-center {{ request()->routeIs('calidad.*') ? 'text-white' : 'text-purple-400' }}"></i>
-                        <span>Control de Calidad</span>
-                    </a>
-                @endif
-
-                {{-- Módulos Stock --}}
-                @if(in_array($userRole, ['administrador', 'encargado_stock']))
-                    <a href="{{ route('stock.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
-                        <i class="fa-solid fa-boxes-stacked w-5 text-center text-emerald-400"></i>
-                        <span>Consulta de Stock</span>
-                    </a>
-                    <a href="{{ route('consumos.create') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
-                        <i class="fa-solid fa-industry w-5 text-center text-amber-400"></i>
-                        <span>Consumo de Planta</span>
-                    </a>
-                @endif
-
-                {{-- Módulos Administrador --}}
-                @if($userRole === 'administrador')
-                    <a href="{{ route('reportes.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
-                        <i class="fa-solid fa-chart-line w-5 text-center text-rose-400"></i>
-                        <span>Generar Reportes</span>
-                    </a>
-                    <a href="{{ route('usuarios.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
-                        <i class="fa-solid fa-users w-5 text-center text-cyan-400"></i>
-                        <span>Gestión de Usuarios</span>
-                    </a>
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
-                        <i class="fa-solid fa-database w-5 text-center text-teal-400"></i>
-                        <span>Gestión de Datos</span>
-                    </a>
-                @endif
-            </nav>
-
-            <div class="border-t border-slate-700 pt-4 text-xs text-slate-400 text-center">
-                GestionandoTé © 2026
-            </div>
-        </aside>
-
-        <!-- Área Principal de Contenido -->
-        <main class="flex-1 p-8 overflow-y-auto">
-            @yield('content')
-        </main>
-    </div>
-
-</body>
-</html>
+    {{-- Módulos Administrador --}}
+    @if($userRole === 'administrador')
+        <a href="{{ route('reportes.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+            <i class="fa-solid fa-chart-line w-5 text-center text-rose-400"></i>
+            <span>Generar Reportes</span>
+        </a>
+        <a href="{{ route('usuarios.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-700 hover:text-white transition">
+            <i class="fa-solid fa-users w-5 text-center text-cyan-400"></i>
+            <span>Gestión de Usuarios</span>
+        </a>
+    @endif
+</nav>
