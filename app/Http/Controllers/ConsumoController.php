@@ -20,11 +20,26 @@ class ConsumoController extends Controller
     }
 
     public function index()
-    {
-        $tablaMov = $this->getTableName(['MOVIMIENTO_STOCK', 'movimiento_stock', 'movimientos_stock', 'consumos']);
-        $consumos = DB::table($tablaMov)->orderBy('id', 'desc')->get();
-        return view('consumos.index', compact('consumos'));
+{
+    $tablaMov = $this->getTableName(['MOVIMIENTO_STOCK', 'movimiento_stock', 'movimientos_stock', 'consumos']);
+
+    // Detecta automáticamente si la columna es IDMovimiento, id_movimiento o id
+    $colId = Schema::hasColumn($tablaMov, 'IDMovimiento') 
+        ? 'IDMovimiento' 
+        : (Schema::hasColumn($tablaMov, 'id_movimiento') 
+            ? 'id_movimiento' 
+            : (Schema::hasColumn($tablaMov, 'id') ? 'id' : null));
+
+    $query = DB::table($tablaMov);
+
+    if ($colId) {
+        $query->orderBy($colId, 'desc');
     }
+
+    $consumos = $query->get();
+
+    return view('consumos.index', compact('consumos'));
+}
 
     public function create()
     {

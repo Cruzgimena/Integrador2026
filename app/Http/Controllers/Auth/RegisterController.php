@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'apellido'       => ['required', 'string', 'max:45'],
             'email'          => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'       => ['required', 'string', 'min:8', 'confirmed'],
-            'id_perfil'      => ['required', 'integer'],
+            
         ], [
             // Mensajes personalizados en español
             'nombre_usuario.unique'   => 'El nombre de usuario ya se encuentra registrado.',
@@ -91,7 +91,6 @@ class RegisterController extends Controller
             'nombres'        => $data['nombres'],
             'apellido'       => $data['apellido'],
             'email'          => $data['email'],
-            'id_perfil'      => $perfilId,
             'role'           => $rolTexto, // <-- Este campo faltaba
             'estado'         => 'activo',
             'password'       => Hash::make($data['password']),
